@@ -1,0 +1,41 @@
+
+extends ../layout/index
+
+block contenido
+    div.py-10 
+        img(src="", alt="")
+        h1.text-4xl.my-10.font-light.text-center.text-sans Welcome to
+            span.font-medium   Tour Latam 
+
+            span.font-medium  Register
+        h2.text-center.font-normal.font-sans.text-3xl  Register now and get access all our tours
+
+        .mt-8.mx-auto.max-w-md
+            .bg-white.py-8.px-4.shadow.rounded
+                form.space-y5(method="POST" action="/auth/register")
+                    div     
+                        label(class="block text-sm text-gray-500 mb-2 font-medium mt-2 after:content-['*'] after:ml-0.5 after:text-red-500 " for="nombre") Add your full name
+                        input#nombre( class=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" placeholder="Add your name")
+
+                    div
+                        label(class="block text-sm text-gray-500 mb-2 font-medium mt-2 after:content-['*'] after:ml-0.5 after:text-red-500 " for="email")  Add your email
+                        input#email( class=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" placeholder="Add@example.com" type="email" name="email")
+
+                    div        
+                        label(class="block text-sm text-gray-500 mb-2 font-medium mt-2 after:content-['*'] after:ml-0.5 after:text-red-500 " for="password")  Add your password
+                        input#password( class=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" placeholder="*******" type="password" name="password")
+                            
+                    div  
+                        label( class="block text-sm text-gray-500 mb-2 font-medium mt-2 after:content-['*'] after:ml-0.5 after:text-red-500 " for="password-2") Confirm your password
+                        input#password( class=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" placeholder="*******" type="password" name="password")
+                    
+
+
+                    input( class="w-full bg-orange-600 hover:bg-orange-400 text-white font-medium mt-3 rounded-sm py-2 shadow cursor-pointer" type="submit" value="Create account")
+                    
+                    hr(class="mt-3 ")
+
+                    div.flex.items-center.justify-between.mt-3
+                        //- button( class="w-full bg-gray-100 text-center py-2 mt-3 text-white rounded font-medium shadow  hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 ")
+                        a(class="text-sm text-black py-3 w-full bg-gray-100 text-center font-medium rounded shadow" href="/auth/login ") Login 
+                        

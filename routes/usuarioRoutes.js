@@ -1,10 +1,12 @@
 import express from "express";
-import { formularioLogin, formularioSignUp,  } from "../controllers/usuarioController.js";
+import { formularioLogin, formularioRecoverPas, formularioSignUp, register,  } from "../controllers/usuarioController.js";
 
 export const router = express.Router()
 
 router.get('/login', formularioLogin)
-router.get('/signup', formularioSignUp )
+router.get('/register', formularioSignUp )
+router.post('/register', register)
+router.get('/recover', formularioRecoverPas)
 
 
 

@@ -1,8 +1,18 @@
 // const express = require('express') // 
 import express from 'express'
 import { router } from './routes/usuarioRoutes.js';
+import { db } from './config/db.js';
 
+// crando la app
 const app = express()
+
+// Conexion a la base de datos
+try {
+    await db.authenticate();
+    console.log('Conexion correcta a la base de datos')
+} catch (error) {           
+    console.log(error);
+}
 
 // Routing
 app.use('/auth', router)
