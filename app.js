@@ -6,9 +6,13 @@ import { db } from './config/db.js';
 // crando la app
 const app = express()
 
-// Conexion a la base de datos
+// Habilitar lectura de formularios
+app.use(express.urlencoded({extended: true}))
+
+// Conexion a la base de datos 
 try {
     await db.authenticate();
+    db.sync()
     console.log('Conexion correcta a la base de datos')
 } catch (error) {           
     console.log(error);
