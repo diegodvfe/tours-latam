@@ -1,14 +1,17 @@
 import express from "express";
-import { formularioLogin, formularioRecoverPas, formularioSignUp, register,  } from "../controllers/usuarioController.js";
+import {
+   formConfirm,
+   formularioLogin,
+   formularioRecoverPas,
+   formularioSignUp,
+   register,
+} from "../controllers/usuarioController.js";
 
-export const router = express.Router()
+export const router = express.Router();
 
-router.get('/login', formularioLogin)
-router.get('/register', formularioSignUp )
-router.post('/register', register)
-router.get('/recover', formularioRecoverPas)
+router.get("/login", formularioLogin);
+router.get("/register", formularioSignUp);
+router.post("/register", register);
+router.get("/confirmar-cuenta/:token", formConfirm);
 
-
-
-
-
+router.get("/recover", formularioRecoverPas);

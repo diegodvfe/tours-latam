@@ -24,10 +24,12 @@ const emailRegister = async (datos) => {
     
         <p> Click here to know more your travel and check our new tours. For your first time we offer a disccount of 15% for your next trip</p>
 
-        <p><a>Confirm your account</a></p>
+        <p>
+        <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3004}/auth/confirmar-cuenta/${token}"> Confirm your account</a>
+        </p>
 
         <p>If you dindt create an account, here is another link</p>
-    `,
+    `
    });
 };
 

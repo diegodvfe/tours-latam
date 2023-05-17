@@ -6,18 +6,21 @@ import Usuario from "../models/Usuario.js";
 import { genarateId } from "../helpers/tokens.js";
 import { emailRegister } from "../helpers/email.js";
 
+// Acceso al login
 const formularioLogin = (req, res) => {
    res.render("auth/login", {
       pagina: "Login",
    });
 };
 
+// Creacion de cuenta
+
 const formularioSignUp = (req, res) => {
    res.render("auth/register", {
       pagina: "Create acount",
    });
 };
-
+// validacion de registro
 const register = async (req, res) => {
    // validacion
    await check("nombre")
@@ -40,8 +43,6 @@ const register = async (req, res) => {
       .run(req);
 
    let resultado = validationResult(req);
-
-   // return res.json(resultado.array());
 
    // Verificar que el resultado este vacio
    if (!resultado.isEmpty()) {
@@ -79,7 +80,7 @@ const register = async (req, res) => {
 
    // Almacenar un usuario
 
-  const usuario= await Usuario.create({
+   const usuario = await Usuario.create({
       nombre,
       email,
       password,
@@ -91,7 +92,7 @@ const register = async (req, res) => {
       nombre: usuario.nombre,
       email: usuario.email,
       token: usuario.token,
-   })
+   });
 
    // const usuario = await Usuario.create(req.body);
    // res.json(usuario);
@@ -110,9 +111,29 @@ const formularioRecoverPas = (req, res) => {
    });
 };
 
+const formConfirm = async (req, res) => {
+
+   const { token } = req.params
+
+   // Verificando cuenta
+   const usuario = await Usuario.findOne({
+      where: {token}
+   })
+   if(!usuario) {
+     return res.render("confirmar-cuenta", {
+      pagina: "Your account was not successfully confirm",
+      message: "Please try another again",
+      error: true
+     })
+   }
+   console.log(usuario);
+  
+};
+
 export {
    formularioLogin,
    formularioSignUp,
    formularioRecoverPas,
+   formConfirm,
    register,
 };

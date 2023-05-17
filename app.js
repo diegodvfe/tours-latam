@@ -32,7 +32,7 @@ app.use(express.static('public'))
 
 // Definir u puerto 
 
-const port = 3004
+const port = process.env.PORT || 3004
 app.listen(port, () =>{
     console.log( `El servidor esta funcionando ${port}`);
 })

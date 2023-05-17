@@ -1,0 +1,13 @@
+
+extends ../layout/index
+
+block contenido
+    div.py-10 
+        h1.text-4xl.my-10.font-light.text-center.text-sans Please try another again
+            span.font-medium   Your account was not correct
+        h2.text-center.font-normal.font-sans.text-3xl= pagina
+
+
+    div(class='bg-white shadow py-8 px-4 rounded-lg max-w-sm mx-auto')
+
+        p(class= error ? "bg-red-400" : 'bg-green-400').py-3.px-5.rounded-sm.w-full.text-center.font-medium= message
