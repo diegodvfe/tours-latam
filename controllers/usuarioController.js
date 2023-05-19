@@ -5,6 +5,7 @@ import {
 import Usuario from "../models/Usuario.js";
 import { genarateId } from "../helpers/tokens.js";
 import { emailRegister } from "../helpers/email.js";
+// import { csrf } from 'csurf';
 
 // Acceso al login
 const formularioLogin = (req, res) => {
@@ -16,10 +17,17 @@ const formularioLogin = (req, res) => {
 // Creacion de cuenta
 
 const formularioSignUp = (req, res) => {
+   
    res.render("auth/register", {
       pagina: "Create acount",
+      csrfToken: req.csrfToken()
+      
+      // CSrf
+      // csrfToken: req.csrfToken()
    });
+   console.log(req.csrfToken())
 };
+
 // validacion de registro
 const register = async (req, res) => {
    // validacion
@@ -49,6 +57,7 @@ const register = async (req, res) => {
       // Errores
       return res.render("auth/register", {
          pagina: "Create acount",
+         csrfToken: req.csrfToken(),
          errores: resultado.array(),
          usuario: {
             nombre: req.body.nombre,
@@ -66,6 +75,7 @@ const register = async (req, res) => {
    if (existUsuario) {
       return res.render("auth/register", {
          pagina: "Create acount",
+         csrfToken: req.csrfToken(),
          errores: [
             {
                msg: "The user is alredy register",
@@ -104,12 +114,37 @@ const register = async (req, res) => {
          "We send you an emial to confirm, please confirm your account",
    });
 };
-
+// Recuperar contraseña
 const formularioRecoverPas = (req, res) => {
    res.render("auth/recoverpas", {
       pagina: "Recover password",
+      csrfToken: req.csrfToken(),
    });
 };
+
+// Resetera password
+const resetPassword = async (req, res) => {
+    // validacion
+   await check("email")
+      .isEmail()
+      .withMessage(
+         "We need your email to send your key"
+      )
+      .run(req);
+  
+   let resultado = validationResult(req);
+
+   // Verificar que el resultado este vacio
+   if (!resultado.isEmpty()) {
+      // Errores
+      return res.render("auth/recoverpas", {
+         pagina: "Recover your password",
+         csrfToken: req.csrfToken(),
+         errores: resultado.array()
+      });
+   }
+   
+}
 
 const formConfirm = async (req, res) => {
 
@@ -120,13 +155,28 @@ const formConfirm = async (req, res) => {
       where: {token}
    })
    if(!usuario) {
-     return res.render("confirmar-cuenta", {
+     return res.render("auth/confirmar-cuenta", {
       pagina: "Your account was not successfully confirm",
       message: "Please try another again",
       error: true
      })
    }
    console.log(usuario);
+
+   // Confirmacion de la cuenta
+
+   usuario.token = null
+   usuario.confirmando = true
+
+   await usuario.save()
+
+   res.render("auth/cuenta-confirmada", {
+      pagina:
+         "Account confirm",
+      message: "Your account was confirm"
+   });
+
+
   
 };
 
@@ -136,4 +186,5 @@ export {
    formularioRecoverPas,
    formConfirm,
    register,
+   resetPassword
 };

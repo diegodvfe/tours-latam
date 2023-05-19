@@ -3,7 +3,7 @@ extends ../layout/index
 
 block contenido
     div.py-10 
-        img(src="", alt="")
+        
         h1.text-4xl.my-10.font-light.text-center.text-sans Welcome to
             span.font-medium   Tour Latam Register
 
@@ -17,6 +17,7 @@ block contenido
         .mt-8.mx-auto.max-w-md
             .bg-white.py-8.px-4.shadow.rounded
                 form.space-y5(method="POST" action="/auth/register" noValidate)
+                    input(type="hidden" name="_csrf" value=csrfToken)
                     div     
                         label(class="block text-sm text-gray-500 mb-2 font-medium mt-2 after:content-['*'] after:ml-0.5 after:text-red-500 " for="nombre") Add your full name
                         input#nombre( class=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" placeholder="Add your name" type="text" name="nombre" value= usuario ? usuario.nombre : '' )

@@ -1,10 +1,9 @@
-
 extends ../layout/index
 
 block contenido
     div.py-10 
-        h1.text-4xl.my-10.font-light.text-center.text-sans Please try another again
-            span.font-medium   Your account was not correct
+        h1.text-4xl.my-10.font-light.text-center.text-sans Tour Latam
+        span.font-medium.text-center.text-sans.   Thank you for confirm 
         h2.text-center.font-normal.font-sans.text-3xl= pagina
 
 
@@ -12,5 +11,5 @@ block contenido
 
         p(class= error ? "bg-red-400" : 'bg-green-400').py-3.px-5.rounded-sm.w-full.text-center.font-medium.text-white= message
 
-        if error
-            a(href="/auth/recover" class=" text-center font-medium text-sm text-slate-500 mt-10 block ") Click here to send a new token
+        if !error
+            a(href="/auth/login" class=" text-center font-medium text-sm text-slate-500 mt-10 block ") You can login
